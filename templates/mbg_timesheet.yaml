@@ -1,0 +1,122 @@
+---
+employee_name:
+ x: 150
+ y: 544
+ width: 390
+ height: 16
+company:
+ x: 150
+ y: 508 
+ width: 390
+ height: 16
+assignment_continuing:
+ x: 150
+ y: 471
+ width: 34
+ height: 12
+assignment_finished:
+ x: 280
+ y: 471
+ width: 58
+ height: 12
+assignment_available:
+ x: 470
+ y: 471
+ width: 68
+ height: 12
+mon_date:
+  x: 41
+  y: 411
+  width: 44
+  height: 18
+tue_date:
+  x: 41
+  y: 392
+  width: 44
+  height: 18
+wed_date:
+  x: 41
+  y: 373
+  width: 44
+  height: 18
+thu_date:
+  x: 41
+  y: 354
+  width: 44
+  height: 18
+fri_date:
+  x: 41
+  y: 335
+  width: 44
+  height: 18
+sat_date:
+  x: 41
+  y: 316
+  width: 44
+  height: 18
+sun_date:
+  x: 41
+  y: 297
+  width: 44
+  height: 18
+mon_hours:
+  x: 280
+  y: 411
+  width: 58
+  height: 18
+tue_hours:
+  x: 280
+  y: 392
+  width: 58
+  height: 18
+wed_hours:
+  x: 280
+  y: 373
+  width: 58
+  height: 18
+thu_hours:
+  x: 280
+  y: 354
+  width: 58
+  height: 18
+fri_hours:
+  x: 280
+  y: 335
+  width: 58
+  height: 18
+sat_hours:
+  x: 280
+  y: 316
+  width: 58
+  height: 18
+sun_hours:
+  x: 280
+  y: 297
+  width: 58
+  height: 18
+total_reg_hours:
+  x: 280
+  y: 278
+  width: 58
+  height: 18
+grand_total_hours:
+  x: 470
+  y: 278
+  width: 68
+  height: 18
+manager_name_and_title:
+  x: 150
+  y: 180
+  width: 220
+  height: 16
+employee_signature_date:
+  x: 400
+  y: 140
+  width: 140
+  height: 16
+employee_signature_image:
+  type: image
+  x: 150
+  y: 160
+  width: 190
+  height: 34

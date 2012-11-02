@@ -1,0 +1,18 @@
+<p>Hi <%=config['manager_name']%>,</p>
+
+<p>My timesheet for the week of <%=data['date']['mon']%> is attached.</p>
+
+<p><strong>Please 'Reply to All' with your approval.</strong></p>
+
+<p>Here are the pertinent data from the timesheet:</p>
+
+<p><table border="1" cellpadding="5">
+  <tr><th>Day</th><th>Date</th><th>Hours</th></tr>
+<% ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].each do |day| %>
+<tr><td><%=day.capitalize%></td><td><%=data['date'][day]%></td><td><%=data['hours'][day]%> hrs</td></tr>
+<% end %>
+<tr><th colspan="2">TOTAL</th><th><%=data['total_hours']%> hrs</th></tr>
+</table></p>
+           
+<p>Thanks,</p>
+<p><%=config['formdata']['employee_name']%></p>
