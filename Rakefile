@@ -4,6 +4,10 @@ task :timesheet do
   ruby "app/timesheet.rb"
 end
 
-task :install do
-  ln_s File.join(File.dirname(File.expand_path(__FILE__)), "app", "timesheet.rb"), "/usr/local/bin/timesheet"
+task :sendlast do
+  ruby "app/timesheet.rb --send --uselast"
+end
+
+task :send do
+  ruby "app/timesheet.rb --send"
 end
