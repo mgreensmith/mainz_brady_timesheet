@@ -1,0 +1,34 @@
+---
+lastrun_file: config/lastrun.yaml
+template_file: templates/mbg_timesheet.pdf
+template_yaml: templates/mbg_timesheet.yaml
+output_file_prefix: Timesheet_
+output_path: data
+formdata:
+  employee_name: Your Name
+  company: Your Company
+  assignment_continuing: X
+  employee_signature_image: templates/your_sig.jpg
+default_hours:
+  mon: 8.0
+  tue: 8.0
+  wed: 8.0
+  thu: 8.0
+  fri: 8.0
+  sat: 0.0
+  sun: 0.0
+manager_name: Your Manager
+mail:
+  options:
+    :address: smtp.gmail.com
+    :port: 587
+    :domain: gmail.com
+    :user_name: email@gmail.com
+    :password: [redacted]
+    :authentication: plain
+    :enable_starttls_auto: true
+  recipient: recipient@email.dom
+  sender: sender@email.dom
+  subject: Please approve my timesheet for week of
+  body_template_html: templates/email_template_html.erb
+  body_template_text: templates/email_template_text.erb

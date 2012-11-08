@@ -1,2 +1,4 @@
 *.pdf
 .DS_Store
+config.yaml
+gmail_password
