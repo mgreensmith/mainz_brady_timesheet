@@ -1,4 +1,5 @@
 data/*.pdf
 *.DS_Store
-config.yaml
+config/config.yaml
+config/lastrun.yaml
 gmail_password
