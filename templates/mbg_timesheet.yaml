@@ -24,6 +24,7 @@ assignment_available:
  y: 471
  width: 68
  height: 12
+
 mon_date:
   x: 41
   y: 411
@@ -59,6 +60,79 @@ sun_date:
   y: 297
   width: 44
   height: 18
+
+mon_start:
+  x: 86
+  y: 411
+  width: 63
+  height: 18
+tue_start:
+  x: 86
+  y: 392
+  width: 63
+  height: 18
+wed_start:
+  x: 86
+  y: 373
+  width: 63
+  height: 18
+thu_start:
+  x: 86
+  y: 354
+  width: 63
+  height: 18
+fri_start:
+  x: 86
+  y: 335
+  width: 63
+  height: 18
+sat_start:
+  x: 86
+  y: 316
+  width: 63
+  height: 18
+sun_start:
+  x: 86
+  y: 297
+  width: 63
+  height: 18
+
+mon_end:
+  x: 222
+  y: 411
+  width: 56
+  height: 18
+tue_end:
+  x: 222
+  y: 392
+  width: 56
+  height: 18
+wed_end:
+  x: 222
+  y: 373
+  width: 56
+  height: 18
+thu_end:
+  x: 222
+  y: 354
+  width: 56
+  height: 18
+fri_end:
+  x: 222
+  y: 335
+  width: 56
+  height: 18
+sat_end:
+  x: 222
+  y: 316
+  width: 56
+  height: 18
+sun_end:
+  x: 222
+  y: 297
+  width: 56
+  height: 18
+
 mon_hours:
   x: 280
   y: 411

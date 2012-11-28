@@ -7,7 +7,7 @@ Please 'Reply to All' with your approval.
 Here are the pertinent data from the timesheet:
 
 <% ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].each do |day| %>
-<%=day.capitalize%> <%=data['date'][day]%>: <%=data['hours'][day]%> hrs
+<%=day.capitalize%> <%=data['date'][day]%>: <% if data['hours'][day].to_s != "" %><%=data['hours'][day]%> hrs<%end%>
 <% end %>
 
 TOTAL: <%=data['total_hours']%> hrs

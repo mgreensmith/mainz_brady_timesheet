@@ -16,14 +16,14 @@ config = load_config
 
 $opts = Trollop::options do
   version "timesheet 0.0.1 (c) 2012 Matt Greensmith"
-  banner <<-EOS
+  banner <<-EOS.unindent
   
-Timesheet fills out and optionally sends a weekly timesheet to Mainz Brady.
-It defaults to the current week, where a week begins on Monday.
+  Timesheet fills out and optionally sends a weekly timesheet to Mainz Brady.
+  It defaults to the current week, where a week begins on Monday.
 
-Usage: timesheet.rb [--send] [--uselast | (--weekof, -[mtwhfsu] <hours>)]
+  Usage: timesheet.rb [--send] [--uselast | (--weekof, -[mtwhfsu] <hours>)]
 
-EOS
+  EOS
   opt :mon, "Monday hours worked", :default => config['default_hours']['mon']
   opt :tue, "Tuesday hours worked", :default => config['default_hours']['tue']
   opt :wed, "Wednesday hours worked", :default => config['default_hours']['wed']
@@ -45,16 +45,22 @@ def get_week
   proposed_week
 end
 
-def make_data(monday_date)
+def make_data(monday_date, config)
   total_hours = 0
   data = {}
   data['date'] = {}
   data['hours'] = {}
+  data['start'] = {}
+  data['end'] = {}
   days = ['mon','tue','wed','thu','fri','sat','sun']
   days.each do |day|
-    data['date'][day] = (monday_date + days.index(day)).to_s
-    data['hours'][day] = $opts[day.intern]
-    total_hours += $opts[day.intern]
+    unless $opts[day.intern] == 0
+      data['date'][day] = (monday_date + days.index(day)).to_s
+      data['hours'][day] = $opts[day.intern]
+      data['start'][day] = config['default_start'][day]
+      data['end'][day] = config['default_end'][day]
+      total_hours += $opts[day.intern]
+    end
   end
   data['total_hours'] = total_hours
   data
@@ -66,14 +72,14 @@ def fill_cell(content, f)
     case f['type']
     when "image"
       image File.join($app_root, content),
-            :position => :center,
-            :vposition => :center,
-            :fit => [f['width'], f['height']]
+      :position => :center,
+      :vposition => :center,
+      :fit => [f['width'], f['height']]
     else
       text_box  content.to_s, 
-                :align => :center,
-                :valign => :center,
-                :overflow => :shrink_to_fit
+      :align => :center,
+      :valign => :center,
+      :overflow => :shrink_to_fit
     end
   end
 end
@@ -83,7 +89,7 @@ def build_pdf(template_file, template_yaml, config, data, output_file)
     config['formdata'].each do |field_name, field_data|
       fill_cell(field_data, template_yaml[field_name])
     end
-    ['date','hours'].each do |ftype|
+    ['date','hours','start','end'].each do |ftype|
       data[ftype].each do |day, date|
         fill_cell(date, template_yaml["#{day}_#{ftype}"])
       end
@@ -98,7 +104,7 @@ end
 if $opts[:uselast]
   data = load_config(config['lastrun_file'])
 else
-  data = make_data(last_monday(get_week))
+  data = make_data(last_monday(get_week), config)
   save_lastrun(data)  
 end
 
@@ -123,6 +129,7 @@ if $opts[:send]
   Mail.deliver do
     to config['mail']['recipient']
     from config['mail']['sender']
+    bcc config['mail']['bcc']
     subject message_subject
     text_part do
       body message_text
@@ -132,7 +139,7 @@ if $opts[:send]
       content_type 'text/html; charset=UTF-8'
       body message_html
     end
-    #add_file output_file
+    add_file output_file
   end
 else
   `open #{output_file}`

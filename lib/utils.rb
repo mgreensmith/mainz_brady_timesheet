@@ -17,3 +17,15 @@ end
 def save_lastrun(config, file = load_config['lastrun_file'])
   File.open(File.join($app_root, file), "w") {|f| f.write(config.to_yaml) }
 end
+
+# Strip leading whitespace
+# Use it with a heredoc eg:
+# text = <<-EOS.unindent
+#	foo
+#	   bar
+# EOS
+class String
+  def unindent 
+    gsub(/^#{scan(/^\s*/).min_by{|l|l.length}}/, "")
+  end
+end

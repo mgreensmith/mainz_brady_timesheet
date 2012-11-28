@@ -9,6 +9,22 @@ formdata:
   company: Your Company
   assignment_continuing: X
   employee_signature_image: templates/your_sig.jpg
+default_start:
+  mon: 9:00am
+  tue: 9:00am
+  wed: 9:00am
+  thu: 9:00am
+  fri: 9:00am
+  sat: 9:00am
+  sun: 9:00am
+default_end:
+  mon: 5:30pm
+  tue: 5:30pm
+  wed: 5:30pm
+  thu: 5:30pm
+  fri: 5:30pm
+  sat: 5:30pm
+  sun: 5:30pm
 default_hours:
   mon: 8.0
   tue: 8.0
@@ -29,6 +45,7 @@ mail:
     :enable_starttls_auto: true
   recipient: recipient@email.dom
   sender: sender@email.dom
+  bcc: bcc@email.dom
   subject: Please approve my timesheet for week of
   body_template_html: templates/email_template_html.erb
   body_template_text: templates/email_template_text.erb
