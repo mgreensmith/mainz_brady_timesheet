@@ -3,3 +3,4 @@ data/*.pdf
 config/config.yaml
 config/lastrun.yaml
 gmail_password
+templates/greensmith_sig.jpg
