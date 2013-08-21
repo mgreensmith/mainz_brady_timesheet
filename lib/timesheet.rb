@@ -25,7 +25,7 @@ class Timesheet
       Timesheet fills out and optionally sends a weekly timesheet to Mainz Brady.
       It defaults to the current week, where a week begins on Monday.
 
-      Usage: timesheet.rb [--send] [--uselast | (--weekof, -[mtwhfsu] <hours>)]
+      Usage: timesheet [--send] [--uselast | (--weekof, -[mtwhfsu] <hours>)]
 
       EOS
       opt :mon, "Monday hours worked", :type => :float, :default => CONFIG['default_hours']['mon']
