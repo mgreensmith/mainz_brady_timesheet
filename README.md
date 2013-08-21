@@ -1,4 +1,4 @@
-## Timesheet
+## Mainz Brady Group Timesheet
 
 As a [virtuous programmer](http://threevirtues.com/), I am way too lazy to manually fill out and submit a timesheet every week, especially when my computer could easily handle this tedious chore without any intervention or action required on my part.
 
@@ -8,7 +8,7 @@ This implementation of an automated PDF filler is specific to the timesheet of m
 
 1. Clone me and `bundle install`
 2. Create `config/config.yaml` by copying `config.yaml.default` and modifying as necessary.
-3. Add an image of your signature to `/templates` and modify the `employee_signature_image` attribute in the config file accordingly.
+3. Add an image of your signature to `/templates` and modify the `employee_signature_image` attribute in the config file accordingly. My signature image is 157x49 px, you may need to modify the `mbg_template.yaml` anchor points for the signature to align yours correctly if your dimensions differ.
 
 
 ##Usage

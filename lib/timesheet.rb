@@ -72,8 +72,8 @@ class Timesheet
   end
 
 
-  def build_pdf(data)
-    Prawn::Document.generate(@output_file, :template => @template_file) do |pdf|
+  def build_pdf(data, output_file)
+    Prawn::Document.generate(output_file, :template => @template_file) do |pdf|
       CONFIG['formdata'].each do |field_name, field_data|
         pdf.fill_cell(field_data, @template_yaml[field_name])
       end
@@ -88,14 +88,14 @@ class Timesheet
     end
   end
 
-  def send_mail
+  def send_mail(data, attachment)
     Mail.defaults do
-      delivery_method :smtp, config['mail']['options']
+      delivery_method :smtp, CONFIG['mail']['options']
     end
     
     namespace = OpenStruct.new local_variables
-    message_text = ERB.new(File.open(File.join($app_root, config['mail']['body_template_text'])), 0, "%<>").result(namespace.instance_eval { binding })
-    message_html = ERB.new(File.open(File.join($app_root, config['mail']['body_template_html'])), 0, "%<>").result(namespace.instance_eval { binding })
+    message_text = ERB.new(File.open(File.join($app_root, CONFIG['mail']['body_template_text'])), 0, "%<>").result(namespace.instance_eval { binding })
+    message_html = ERB.new(File.open(File.join($app_root, CONFIG['mail']['body_template_html'])), 0, "%<>").result(namespace.instance_eval { binding })
     message_subject = "#{CONFIG['mail']['subject']} #{data['date']['mon']}"
     
     Mail.deliver do
@@ -111,7 +111,7 @@ class Timesheet
         content_type 'text/html; charset=UTF-8'
         body message_html
       end
-      add_file @output_file
+      add_file attachment
     end
   end
 
@@ -120,17 +120,17 @@ class Timesheet
       data = load_config(CONFIG['lastrun_file'])
     else
       data = make_data(last_monday(get_week))
-      save_lastrun(data)  
+      save_lastrun(@data)  
     end
 
     @template_file = File.join($app_root, CONFIG['template_file'])
     @template_yaml = load_config(CONFIG['template_yaml'])
 
     output_file_name = "#{CONFIG['output_file_prefix']}#{DateTime.now.strftime("%Y%m%d.%H%M%S")}.pdf"
-    @output_file = @opts[:send] ? File.join($app_root, CONFIG['output_path'], output_file_name) : File.join(Dir.tmpdir, output_file_name)
+    output_file = @opts[:send] ? File.join($app_root, CONFIG['output_path'], output_file_name) : File.join(Dir.tmpdir, output_file_name)
 
-    build_pdf(data)
+    build_pdf(data, output_file)
 
-    @opts[:send] ? send_mail : `open #{@output_file}`
+    @opts[:send] ? send_mail(data, output_file) : `open #{@output_file}`
   end
 end
